@@ -1,12 +1,12 @@
 const data = [
   {
     id: 1,
-    title: "Test Announcement",
+    title: "Website Launch",
     date: "February 9, 2026",
-    content: "This is a test announcement.",
+    content: "We are excited to announce the launch of our new website!\nWe will be sharing our announcements here. Our updates and member count goals will still occur on our Discord server. (https://discord.gg/c5rHxJ3sr8)",
     category: "News",
   }
-];
+]
 
 function displayAnnouncements(data) {
   const listContainer = document.getElementById("announcement-list");
