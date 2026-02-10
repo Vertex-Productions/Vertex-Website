@@ -20,7 +20,7 @@ function displayAnnouncements(data) {
       <span class="tag">${item.category}</span>
       <h2>${item.title}</h2>
       <span class="date">${item.date}</span>
-      <p>${item.content}</p>
+      <p>${item.content.replace(/\n/g, '<br>')}</p>
     `;
 
     listContainer.appendChild(card);
