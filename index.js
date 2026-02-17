@@ -1,18 +1,16 @@
 const data = [
   {
-    id: 1,
     title: "Server Tag & Bot Update",
     date: "February 17, 2026",
     content: "We now have our own server tag in our Discord Server.\n\nWe have also pushed out some changes that improve /do-all & /chat use.\n\nThanks for reading and keep using our bot.",
-    category: "Discord"
-  },
-  {
-    id: 1,
-    title: "Website Launch",
-    date: "February 9, 2026",
-    content: "We are excited to announce the launch of our new website!\n\nWe will be sharing our announcements here. Our updates and member count goals will still occur on our Discord server. (https://discord.gg/c5rHxJ3sr8)",
     category: "News"
   },
+  {
+    title: "Website Launch",
+    date: "February 9, 2026",
+    content: "We are excited to announce the launch of our new website!\n\nWe will be sharing our announcements here.\n\nOur updates and member count goals will still occur on our Discord server. (https://discord.gg/c5rHxJ3sr8)",
+    category: "News"
+  }
 ]
 
 function displayAnnouncements(data) {
