@@ -1,22 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VERTEX PRODUCTIONS ©</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>VERTEX PRODUCTIONS © ANNOUNCEMENTS</h1>
-        <p>Stay up to date with us!</p>
-      </header>
-      <div id="announcement-list">
-        <p class="loading">Loading latest announcements...</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VERTEX PRODUCTIONS ©</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg2: #11161c;
+      --card: rgba(255, 255, 255, 0.08);
+      --card2: rgba(255, 255, 255, 0.12);
+      --text: #e9f0f5;
+      --muted: #a6b3c2;
+      --accent: #0080ff;
+      /* Changed to Blue */
+      --accent2: #00d4ff;
+      /* Changed to Light Blue */
+      --ring: rgba(0, 174, 209, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      /* Changed red radial gradient to blue */
+      background: radial-gradient(circle at 20% -10%, rgba(0, 128, 255, 0.2), transparent 40%),
+        radial-gradient(circle at 80% 0%, rgba(0, 0, 0, 0.25), transparent 40%),
+        linear-gradient(135deg, #0b0f14 0%, #141b22 100%);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .decor {
+      position: fixed;
+      right: -20vmin;
+      top: -20vmin;
+      width: 60vmin;
+      height: 60vmin;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(0, 155, 194, 0.25), rgba(0, 107, 221, 0) 40%, rgba(0, 92, 205, 0.25) 60%, rgba(0, 117, 168, 0) 100%);
+      filter: blur(60px);
+      transform: rotate(25deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100%;
+      padding: 40px 16px 60px;
+    }
+
+    .header {
+      text-align: center;
+      margin: 24px auto 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      /* Border changed to blue */
+      border: 1px solid rgba(0, 128, 255, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    .brand i {
+      color: var(--accent);
+      font-size: 1.15em;
+    }
+
+    .brand h1 {
+      font-size: 1.25rem;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .brand span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    #announcement-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      padding: 8px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      transform: translateY(16px) scale(0.98);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .card:hover {
+      transform: translateY(-2px) scale(1);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+    }
+
+    .card .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      /* Background changed to blue */
+      background: #0066ff;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .card h2 {
+      margin: 8px 0 6px;
+      font-size: 1.15rem;
+      /* Title tint changed to light blue */
+      color: #d1e9ff;
+    }
+
+    .date {
+      font-size: 0.82rem;
+      color: #d0d6de;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .date i {
+      /* Icon color changed to blue */
+      color: #74b9ff;
+    }
+
+    .card p {
+      margin: 6px 0 0;
+      line-height: 1.6;
+      color: #e9eef6;
+    }
+
+    .icon {
+      margin-right: 6px;
+      color: #fff;
+    }
+
+    .loading {
+      text-align: center;
+      color: #a6a6a6;
+      font-style: italic;
+      grid-column: 1 / -1;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .underline {
+      height: 4px;
+      width: 120px;
+      margin: 8px auto 0;
+      /* Gradient changed to blue */
+      background: linear-gradient(45deg, #0052d4, #6fb1fc);
+      border-radius: 4px;
+    }
+
+    .page-enter {
+      animation: pageFade 0.6s ease both;
+    }
+
+    @keyframes pageFade {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="decor" aria-hidden="true"></div>
+
+  <div class="wrapper page-enter" role="main">
+    <header class="header">
+      <div class="brand" aria-label="Vertex Productions Brand">
+        <i class="fas fa-broadcast-tower"></i>
+        <div>
+          <h1>VERTEX PRODUCTIONS © ANNOUNCEMENTS</h1>
+          <span>Keep up to date with our latest updates.</span>
+        </div>
       </div>
+      <div class="underline" aria-hidden="true"></div>
+    </header>
+
+    <div id="announcement-list" aria-label="Announcements">
+      <p class="loading"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading latest announcements...
+      </p>
     </div>
-    <script src="index.js"></script>
-  </body>
+  </div>
+
+  <script>
+    const data = [
+      {
+        title: "Server Tag & Bot Update",
+        date: "February 17, 2026",
+        content:
+          "We now have our own server tag in our Discord Server.\n\nWe have also pushed out some changes that improve /do-all & /chat use.\n\nThanks for reading and keep using our bot.",
+        category: "News",
+      },
+      {
+        title: "Website Launch",
+        date: "February 9, 2026",
+        content:
+          "We are excited to announce the launch of our new website!\n\nWe will be sharing our announcements here.\n\nOur updates and member count goals will still occur on our Discord server. (https://discord.gg/c5rHxJ3sr8)",
+        category: "News",
+      },
+    ];
+
+    function renderAnnouncements(items) {
+      const listContainer = document.getElementById("announcement-list");
+      listContainer.innerHTML = "";
+
+      items.forEach((item, idx) => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const categoryIcon = item.category === "News"
+          ? `<span class="tag"><i class="fas fa-newspaper icon" aria-hidden="true"></i>${item.category}</span>`
+          : `<span class="tag"><i class="fas fa-tag icon" aria-hidden="true"></i>${item.category}</span>`;
+
+        card.innerHTML = `
+            ${categoryIcon}
+            <h2>${item.title}</h2>
+            <div class="date" aria-label="Date">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>${item.date}
+            </div>
+            <p>${item.content.replace(/\\n/g, "\n").replace(/\n/g, "<br>")}</p>
+          `;
+
+        card.style.animation = `fadeInUp 0.6s ease forwards`;
+        card.style.animationDelay = `${idx * 0.12}s`;
+
+        listContainer.appendChild(card);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => renderAnnouncements(data));
+  </script>
+</body>
+
 </html>
